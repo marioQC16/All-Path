@@ -1,0 +1,49 @@
+<style >
+
+
+
+body {
+	background-image: url('file:///E:/SE%20342/AllPathGUI/algorithm.JPG');
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-attachment: fixed;
+	background-size: cover;
+	margin: 0;
+	padding: 0;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+
+#outer {
+	background-color: deepskyblue;
+	width: 800px;
+	line-height: normal;
+	padding: 20px;
+	margin: auto;
+}
+
+h1 {
+	text-align: center;
+	color: white;
+}
+
+p {
+	text-align: center;
+	color: white;
+}
+
+input[type="file"] {
+	display: none;
+}
+
+.custom-file-upload {
+	background-color: #808080;
+	border: 1px solid black;
+	display: inline-block;
+	padding: 6px 12px;
+	cursor: pointer;
+	align-content: center;
+}
+
+</style >
