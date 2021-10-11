@@ -4,8 +4,6 @@ from math import sqrt
 import numpy as np
 import pandas as pd
 
-#  import matplotlib
-
 # changing filepath to a variable name
 fileName = "./testAlgorithm.csv"
 
@@ -68,34 +66,58 @@ def getAdjMatrix(df, l, lineNum, num):
 
 # method call for line count.
 lineNum = simpleCount(fileName)
-print(len(df))
+
 # getting size of matrices
 num = int(sqrt(lineNum))
+
+
+# getting match indices to iterate
+# to iterate through next level of
+# allPath array
+def iterateList(nv, edge, num, idNum):
+    if idNum % num == 0:
+        nv = idNum // num - 1
+        edge = num - 1
+    else:
+        nv = idNum // num
+        edge = idNum % num - 1
+
+    return nv, edge
+
+
+# Using logical to get next slice for AllPath
+def getAnd(l1, l2):
+    return np.logical_and(l1, l2).astype(int)
+
+
+# Using logical or to get next slice for AllPath
+def getOR(l1, l2):
+    return np.logical_or(l1, l2).astype(int)
+
+
+# get the number of nodes nv for each
+# slice in level of array
+def getSumSlice(l, s):
+    temp = []
+    for i in range(s, len(l)):
+        n = sum(l[i])
+        temp.append(n)
+    return temp
+
 
 list1 = []
 # Converting dataframe into an adjacency matrix
 adjMatrix = getAdjMatrix(df, list1, lineNum, num)
 
-# Printing adjacency matrix
-print("Our adjacency matrix is:")
-printArray(adjMatrix, num)
-
 # Slicing adjacency matrix
 # into n number of slices
 adjMatrixList = adjMatrix.tolist()
-print("\nOur slices are:")
-printSlices(adjMatrixList, num, "s")
-# Getting individual slices to print.
 
 # getting identity matrix as int
 idMatrix = np.identity(num, dtype=int)
-print("\nThe identity matrix:")
-printArray(idMatrix, num)
 
 # getting not visited array
 nvArray = getNVMatrix(adjMatrix, idMatrix)
-print("\nThe not visited array")
-printArray(nvArray, num)
 
 # empty index list used keep track of visited nodes
 indexList = []
@@ -113,71 +135,107 @@ del indexList[-1]
 # Slicing not visited matrix
 # into n number of slices
 nvArrList = nvArray.tolist()
-print("\nOur not visited slices are:")
-printSlices(nvArrList, num, "n")
-
-print(f"\nour index list is {indexList}")
-
-print(f"\nour adj matrix list is\n {adjMatrixList}")
-
-print(f"\nour nv matrix list is\n {nvArrList}")
-
-# getting match indices to iterate
-# to iterate through next level of
-# allPath array
-def iterateList (nv, edge, num, idNum):
-    if idNum % num == 0:
-        nv = idNum // num - 1
-        edge = num - 1
-    else:
-        nv = idNum // num
-        edge = idNum % num - 1
-
-    return  nv, edge
-
-# Using logical to get next slice for AllPath
-def getAnd (l1, l2):
-    return np.logical_and(l1,l2).astype(int)
-
-# Using logical or to get next slice for AllPath
-def getOR (l1, l2):
-    return np.logical_or(l1, l2).astype(int)
-
-# get the number of nodes nv for each
-# slice in level of array
-def getSumSlice(l, s):
-    temp = []
-    for i in range(s, len(l)):
-        n = sum(l[i])
-        temp.append(n)
-    return temp
 
 # function calls
 countNv = []
 countSl = []
 countNv = getSumSlice(nvArrList, 0)
 countSl = getSumSlice(adjMatrixList, 0)
-print("our nv count is ",countNv)
-print("our sl count is ",countSl)
+print("our nv count is ", countNv)
+print("our sl count is ", countSl)
 
 # Empty list for new slices
 getSlice = []
 
+
+# Method updates index list
+def updateIndList(n, l, count):
+    for i in range(len(n)):
+        if n[i] == 0:
+            count += 1
+        else:
+            count += 1
+            l.append(count)
+
+
+# Gets next Level of the NV List
+def getLevelNV(numVL, getSlice, nvArrList, countNv):
+    while len(getSlice) != 0:
+        if len(getSlice) >= 2:
+            temp = getSlice.pop(0)
+            temp1 = getSlice.pop(0)
+            newList = getOR(temp, temp1).tolist()
+            getSlice.append(newList)
+        else:
+            temp = getSlice.pop(0)
+            temp = np.logical_not(temp)
+            newNVSlice = getAnd(nvArrList[numVL], temp).tolist()
+            countNv[numVL] = sum(newNVSlice)
+            nvArrList[numVL] = newNVSlice
+
+
+# Allows for exit of while loop
+exSum = sum(countNv)
+
+# Allows for adding a list of n-length
+# to be added to adjMatrixList
+addIndex = 0
+nList = [0] * num
+
+# Iterator used for nvArrList
+numVL = 0
+
+# Iterator use for iterating through adjMatrix
 idCount = 0
-nList = [0, 0, 0, 0]
-for i in range(0, 16):
-    if i != indexList[idCount]:
+
+# Performs next level operations for AllPath algorythim
+while exSum != 0:
+    if addIndex != indexList[idCount] - 1:
+        # adds empty list to adjMatrixList
         adjMatrixList.append(nList)
+        # adds length of list to count
+        count += len(nList)
     else:
+        # combines n and s slices
         temp = []
         temp = iterateList(nvArrList, adjMatrixList, num, indexList[idCount])
         nv = nvArrList[temp[0]]
         edge = adjMatrixList[temp[1]]
         nVe = getAnd(nv, edge)
         nVe = nVe.tolist()
+        if sum(nVe) == 0:
+            # updating count for empty slices
+            count += len(nList)
+        else:
+            # updating count for non-empty slices
+            updateIndList(nVe, indexList, count)
+            count += len(nList)
+        # getSlice used for next level nv
         getSlice.append(nVe)
+        # appending adjMatrix
         adjMatrixList.append(nVe)
+        #  updating iterator for index list
         idCount += 1
+    # getting next level nv
+    if len(getSlice) == countSl[numVL]:
+        # call getLevel function to update various list
+        getLevelNV(numVL, getSlice, nvArrList, countNv)
+        # updating exit variable
+        exSum = sum(countNv)
+        # updating iterator for countNV and nvArrList
+        if numVL < len(countNv) - 1:
+            numVL += 1
+    # updating iterator for 1st if statement
+    addIndex += 1
+
+# print(f"\nour exit sum is {exit sum}")
 
 print(f"\nour new adj matrix list is\n {adjMatrixList}")
-print(f"our adjMatrix List is of {len(adjMatrixList)}")
+print(f"\nour new nv List is of {nvArrList}")
+print(f"\nour index list is {indexList}")
+
+"""
+Write new code below this block
+
+
+"""
