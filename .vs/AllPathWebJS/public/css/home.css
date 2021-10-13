@@ -1,0 +1,42 @@
+body {
+    background-image: url("../images/algorithm.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: auto;
+    overflow: hidden;
+}
+
+
+#outer {
+    background-color: deepskyblue;
+    width: 800px;
+    padding: 20px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+}
+
+li {
+    display: inline;
+    list-style: none;
+    margin: 150px;
+    color: white;
+}
+
+ul {
+    text-orientation: sideways;
+    text-align: center;
+
+}
+
+p {
+    text-align: center;
+    color: white;
+}
+
+
