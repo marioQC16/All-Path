@@ -25,6 +25,15 @@ def simpleCount(fileName):
     return lines
 
 
+# Level Checker
+def checkLevel(indexNumber, nodes):
+    level = 0
+    while indexNumber > nodes:
+        indexNumber = indexNumber // nodes
+        level += 1
+    return level
+
+
 # method used to print arrays
 def printArray(array, num):
     for i in range(num):
@@ -63,6 +72,12 @@ def getAdjMatrix(df, l, lineNum, num):
     df1 = pd.DataFrame({"A": l})
     return df1.values.reshape(num, num)
 
+def levelSummation(level, nodes):
+    sum = 0
+    while level > 1:
+        sum += (nodes ** level)
+        level -= 1
+    return sum
 
 # method call for line count.
 lineNum = simpleCount(fileName)
@@ -75,18 +90,20 @@ num = int(sqrt(lineNum))
 # to iterate through next level of
 # allPath array
 def iterateList(nv, edge, num, idNum):
+    level = checkLevel(idNum, num)
+    if level == 0:
+        level = 1
+    levelSum = levelSummation(level, num)
+    print(f"SUM {levelSum}")
+    print(f"level {level}")
     if idNum % num == 0:
-        nv = idNum // num
-        while nv >= num:
-            nv = nv // num
-        nv -= 1
+        if level == 1:
+            nv = ((idNum - levelSum) // (num ** level)) - 1
+        else:
+            nv = ((idNum - levelSum) // (num ** level))
         edge = num - 1
     else:
-        nv = idNum // num
-        while nv > num:
-            nv = nv // num
-        if idNum > num ** 2:
-            nv -= 1
+        nv = (idNum - levelSum) // (num ** level)
         edge = idNum % num - 1
 
     return nv, edge
@@ -154,18 +171,19 @@ print("our sl count is ", countSl)
 # Empty list for new slices
 getSlice = []
 
-#PROBLEM HERE for some reason it isn't adding the last one i need it to
+
+# PROBLEM HERE for some reason it isn't adding the last one i need it to
 # Method updates index list
 def updateIndList(n, l, count):
-    #print("start")
+    # print("start")
     for i in range(len(n)):
-        #print(n[i])
+        # print(n[i])
         if n[i] == 0:
             count += 1
         else:
             count += 1
             l.append(count)
-    #print("end")
+    # print("end")
 
 
 # Gets next Level of the NV List
