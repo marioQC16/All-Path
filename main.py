@@ -76,10 +76,17 @@ num = int(sqrt(lineNum))
 # allPath array
 def iterateList(nv, edge, num, idNum):
     if idNum % num == 0:
-        nv = idNum // num - 1
+        nv = idNum // num
+        while nv >= num:
+            nv = nv // num
+        nv -= 1
         edge = num - 1
     else:
         nv = idNum // num
+        while nv > num:
+            nv = nv // num
+        if idNum > num ** 2:
+            nv -= 1
         edge = idNum % num - 1
 
     return nv, edge
@@ -147,15 +154,18 @@ print("our sl count is ", countSl)
 # Empty list for new slices
 getSlice = []
 
-
+#PROBLEM HERE for some reason it isn't adding the last one i need it to
 # Method updates index list
 def updateIndList(n, l, count):
+    #print("start")
     for i in range(len(n)):
+        #print(n[i])
         if n[i] == 0:
             count += 1
         else:
             count += 1
             l.append(count)
+    #print("end")
 
 
 # Gets next Level of the NV List
@@ -188,7 +198,7 @@ numVL = 0
 # Iterator use for iterating through adjMatrix
 idCount = 0
 
-# Performs next level operations for AllPath algorythim
+# Performs next level operations for AllPath algorthim
 while exSum != 0:
     if addIndex != indexList[idCount] - 1:
         # adds empty list to adjMatrixList
@@ -199,9 +209,14 @@ while exSum != 0:
         # combines n and s slices
         temp = []
         temp = iterateList(nvArrList, adjMatrixList, num, indexList[idCount])
+        print(temp)
         nv = nvArrList[temp[0]]
+        print(indexList[idCount])
+        print(f"not visited {nv}")
         edge = adjMatrixList[temp[1]]
+        print(f"edges {edge}")
         nVe = getAnd(nv, edge)
+        print(f"New NV{nVe}")
         nVe = nVe.tolist()
         if sum(nVe) == 0:
             # updating count for empty slices
