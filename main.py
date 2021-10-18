@@ -169,8 +169,6 @@ print("our sl count is ", countSl)
 # Empty list for new slices
 getSlice = []
 
-
-# PROBLEM HERE for some reason it isn't adding the last one i need it to
 # Method updates index list
 def updateIndList(n, l, count):
     # print("start")
