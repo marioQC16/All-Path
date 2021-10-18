@@ -25,6 +25,15 @@ def simpleCount(fileName):
     return lines
 
 
+# Level Checker
+def checkLevel(indexNumber, nodes):
+    level = 0
+    while indexNumber > nodes:
+        indexNumber = indexNumber // nodes
+        level += 1
+    return level
+
+
 # method used to print arrays
 def printArray(array, num):
     for i in range(num):
@@ -63,6 +72,12 @@ def getAdjMatrix(df, l, lineNum, num):
     df1 = pd.DataFrame({"A": l})
     return df1.values.reshape(num, num)
 
+def levelSummation(level, nodes):
+    sum = 0
+    while level > 1:
+        sum += (nodes ** level)
+        level -= 1
+    return sum
 
 # method call for line count.
 lineNum = simpleCount(fileName)
@@ -75,11 +90,18 @@ num = int(sqrt(lineNum))
 # to iterate through next level of
 # allPath array
 def iterateList(nv, edge, num, idNum):
+    level = checkLevel(idNum, num)
+    if level == 0:
+        level = 1
+    levelSum = levelSummation(level, num)
     if idNum % num == 0:
-        nv = idNum // num - 1
+        if level == 1:
+            nv = ((idNum - levelSum) // (num ** level)) - 1
+        else:
+            nv = ((idNum - levelSum) // (num ** level))
         edge = num - 1
     else:
-        nv = idNum // num
+        nv = (idNum - levelSum) // (num ** level)
         edge = idNum % num - 1
 
     return nv, edge
@@ -148,16 +170,20 @@ print("our sl count is ", countSl)
 getSlice = []
 
 
+# PROBLEM HERE for some reason it isn't adding the last one i need it to
 # Method updates index list
 def updateIndList(n, l, count):
+    # print("start")
     for i in range(len(n)):
+        # print(n[i])
         if n[i] == 0:
             count += 1
         else:
             count += 1
             l.append(count)
+    # print("end")
 
-
+# CHANGE RIGHT HERE SOMETHING
 # Gets next Level of the NV List
 def getLevelNV(numVL, getSlice, nvArrList, countNv):
     while len(getSlice) != 0:
@@ -188,7 +214,7 @@ numVL = 0
 # Iterator use for iterating through adjMatrix
 idCount = 0
 
-# Performs next level operations for AllPath algorythim
+# Performs next level operations for AllPath algorthim
 while exSum != 0:
     if addIndex != indexList[idCount] - 1:
         # adds empty list to adjMatrixList
@@ -223,8 +249,10 @@ while exSum != 0:
         # updating exit variable
         exSum = sum(countNv)
         # updating iterator for countNV and nvArrList
-        if numVL < len(countNv) - 1:
+        if numVL < len(countNv):
             numVL += 1
+            if numVL == 4:
+                numVL = 0
     # updating iterator for 1st if statement
     addIndex += 1
 
@@ -233,6 +261,7 @@ while exSum != 0:
 print(f"\nour new adj matrix list is\n {adjMatrixList}")
 print(f"\nour new nv List is of {nvArrList}")
 print(f"\nour index list is {indexList}")
+
 
 """
 Write new code below this block
