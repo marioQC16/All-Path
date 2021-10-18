@@ -196,14 +196,7 @@ def getLevelNV(numVL, getSlice, nvArrList, countNv):
             temp = getSlice.pop(0)
             temp = np.logical_not(temp)
             newNVSlice = getAnd(nvArrList[numVL], temp).tolist()
-            print(f"Chnage here1 {countNv}")
-            print(numVL)
-
-            # THIS LINE CHANGES IT SO SOMETHING IS WACK
             countNv[numVL] = sum(newNVSlice)
-
-
-            print(f"Chnage here2 {countNv}")
             nvArrList[numVL] = newNVSlice
 
 
@@ -232,14 +225,9 @@ while exSum != 0:
         # combines n and s slices
         temp = []
         temp = iterateList(nvArrList, adjMatrixList, num, indexList[idCount])
-        #print(temp)
         nv = nvArrList[temp[0]]
-        print(indexList[idCount])
-        #print(f"not visited {nv}")
         edge = adjMatrixList[temp[1]]
-        #print(f"edges {edge}")
         nVe = getAnd(nv, edge)
-        #print(f"New NV{nVe}")
         nVe = nVe.tolist()
         if sum(nVe) == 0:
             # updating count for empty slices
@@ -257,15 +245,14 @@ while exSum != 0:
     # getting next level nv
     if len(getSlice) == countSl[numVL]:
         # call getLevel function to update various list
-        print(f"PreCount NV is {countNv}")
         getLevelNV(numVL, getSlice, nvArrList, countNv)
-        print(f"Count NV is {countNv}")
         # updating exit variable
         exSum = sum(countNv)
         # updating iterator for countNV and nvArrList
-        if numVL < len(countNv) - 1:
+        if numVL < len(countNv):
             numVL += 1
-            print("this has run")
+            if numVL == 4:
+                numVL = 0
     # updating iterator for 1st if statement
     addIndex += 1
 
