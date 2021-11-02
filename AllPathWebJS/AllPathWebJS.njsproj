@@ -35,16 +35,25 @@
     <Content Include="public\css\demo.css">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="public\css\output.css">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="public\images\algorithm.jpg">
       <Publish>False</Publish>
     </Content>
     <Content Include="views\home.ejs">
       <SubType>Code</SubType>
     </Content>
+    <Content Include="views\index.ejs">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="views\demo.ejs">
       <SubType>Code</SubType>
     </Content>
     <Content Include="views\output.ejs">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="public\css\index.css">
       <SubType>Code</SubType>
     </Content>
     <Content Include="app.js" />

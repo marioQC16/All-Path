@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\editable"
   ],
-  "SelectedNode": "\\AllPathWebJS.sln",
+  "SelectedNode": "\\server.js",
   "PreviewInSolutionExplorer": false
 }
