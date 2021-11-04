@@ -1,3 +1,0 @@
-E:\SE 342\AllPathWebJS\obj\Debug\AllPathWebJS.njsproj.CoreCompileInputs.cache
-E:\SE 342\AllPathWebJS\bin\Microsoft.NodejsTools.WebRole.dll
-E:\SE 342\AllPathWebJS\obj\Debug\AllPathWebJS.njsprojAssemblyReference.cache
