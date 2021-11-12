@@ -3,17 +3,31 @@ import os.path
 from math import sqrt
 import numpy as np
 import pandas as pd
+import requests
+import sys
 
-# changing filepath to a variable name
-fileName = "./testAlgorithm.csv"
 
-# opening file, doing file check, converting
-# file to dataframe
-if os.path.isfile(fileName):
-    with open(fileName, "r"):
-        df = pd.read_csv(fileName, header=None)
-else:
-    print(f"file{fileName} does not exist")
+def initialSetup(graphFile):
+    # changing filepath to a variable name
+    global fileName
+    fileName = graphFile
+
+    # opening file, doing file check, converting
+    # file to dataframe
+    global df
+    if os.path.isfile(fileName):
+        with open(fileName, "r"):
+            df = pd.read_csv(fileName, header=None)
+    else:
+        print(f"file{fileName} does not exist")
+
+    # method call for line count.
+    global lineNum
+    lineNum = simpleCount(fileName)
+
+    # getting size of matrices
+    global num
+    num = int(sqrt(lineNum))
 
 
 # method used to count the number of lines
@@ -23,6 +37,10 @@ def simpleCount(fileName):
     for line in open(fileName):
         lines += 1
     return lines
+
+
+# empty index list used keep track of visited nodes
+indexList = []
 
 
 # Level Checker
@@ -72,18 +90,13 @@ def getAdjMatrix(df, l, lineNum, num):
     df1 = pd.DataFrame({"A": l})
     return df1.values.reshape(num, num)
 
+
 def levelSummation(level, nodes):
     sum = 0
     while level > 1:
         sum += (nodes ** level)
         level -= 1
     return sum
-
-# method call for line count.
-lineNum = simpleCount(fileName)
-
-# getting size of matrices
-num = int(sqrt(lineNum))
 
 
 # getting match indices to iterate
@@ -103,7 +116,6 @@ def iterateList(nv, edge, num, idNum):
     else:
         nv = (idNum - levelSum) // (num ** level)
         edge = idNum % num - 1
-
     return nv, edge
 
 
@@ -127,48 +139,6 @@ def getSumSlice(l, s):
     return temp
 
 
-list1 = []
-# Converting dataframe into an adjacency matrix
-adjMatrix = getAdjMatrix(df, list1, lineNum, num)
-
-# Slicing adjacency matrix
-# into n number of slices
-adjMatrixList = adjMatrix.tolist()
-
-# getting identity matrix as int
-idMatrix = np.identity(num, dtype=int)
-
-# getting not visited array
-nvArray = getNVMatrix(adjMatrix, idMatrix)
-
-# empty index list used keep track of visited nodes
-indexList = []
-
-# Counter for indices
-count = 0
-
-id = getIndexList(df, indexList, count)
-# updating count
-count = indexList[-1]
-
-# removing the result of count from indexList
-del indexList[-1]
-
-# Slicing not visited matrix
-# into n number of slices
-nvArrList = nvArray.tolist()
-
-# function calls
-countNv = []
-countSl = []
-countNv = getSumSlice(nvArrList, 0)
-countSl = getSumSlice(adjMatrixList, 0)
-print("our nv count is ", countNv)
-print("our sl count is ", countSl)
-
-# Empty list for new slices
-getSlice = []
-
 # Method updates index list
 def updateIndList(n, l, count):
     # print("start")
@@ -181,7 +151,7 @@ def updateIndList(n, l, count):
             l.append(count)
     # print("end")
 
-# CHANGE RIGHT HERE SOMETHING
+
 # Gets next Level of the NV List
 def getLevelNV(numVL, getSlice, nvArrList, countNv):
     while len(getSlice) != 0:
@@ -194,71 +164,154 @@ def getLevelNV(numVL, getSlice, nvArrList, countNv):
             temp = getSlice.pop(0)
             temp = np.logical_not(temp)
             newNVSlice = getAnd(nvArrList[numVL], temp).tolist()
-            countNv[numVL] = sum(newNVSlice)
+            if sum(newNVSlice) < countNv[numVL]:
+                countNv[numVL] = sum(newNVSlice)
             nvArrList[numVL] = newNVSlice
 
+# Finds the nodes in between start and end
+def findMiddleNodes(nodes, currentLevel, indexNumber):
+    middleString = ""
+    middleNumber = 0
+    while currentLevel > 1:
+        middleNumber = int(((indexNumber % (nodes ** currentLevel)) / (nodes ** (currentLevel - 1))) + 1)
+        middleString += str(middleNumber)
+        middleString += ", "
+        currentLevel -= 1
+    return middleString
 
-# Allows for exit of while loop
-exSum = sum(countNv)
+print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is")
 
-# Allows for adding a list of n-length
-# to be added to adjMatrixList
-addIndex = 0
-nList = [0] * num
 
-# Iterator used for nvArrList
-numVL = 0
+# Finds the shortest path from one node to another
+def shortestPath(index, nodes, start, end):
+    for i in range(len(index)):
+        level = checkLevel(index[i], nodes)
+        if level == 0:
+            level = 1
+        levelSum = levelSummation(level, nodes)
+        indexNumber = index[i] - levelSum
+        mod = (indexNumber % nodes)
+        if mod == 0:
+            mod = nodes
+        if int(mod) == int(end):
+            if int((indexNumber / (nodes ** level)) + 1) == int(start):
+                middle = findMiddleNodes(nodes, level, indexNumber)
+                print(" " + str(start) + ", " + middle + str(end))
+                break
 
-# Iterator use for iterating through adjMatrix
-idCount = 0
 
-# Performs next level operations for AllPath algorthim
-while exSum != 0:
-    if addIndex != indexList[idCount] - 1:
-        # adds empty list to adjMatrixList
-        adjMatrixList.append(nList)
-        # adds length of list to count
-        count += len(nList)
-    else:
-        # combines n and s slices
-        temp = []
-        temp = iterateList(nvArrList, adjMatrixList, num, indexList[idCount])
-        nv = nvArrList[temp[0]]
-        edge = adjMatrixList[temp[1]]
-        nVe = getAnd(nv, edge)
-        nVe = nVe.tolist()
-        if sum(nVe) == 0:
-            # updating count for empty slices
+def indexGraph(graphName):
+    initialSetup(graphName)
+
+    list1 = []
+    # Converting dataframe into an adjacency matrix
+    adjMatrix = getAdjMatrix(df, list1, lineNum, num)
+
+    # Slicing adjacency matrix
+    # into n number of slices
+    adjMatrixList = adjMatrix.tolist()
+
+    # getting identity matrix as int
+    idMatrix = np.identity(num, dtype=int)
+
+    # getting not visited array
+    nvArray = getNVMatrix(adjMatrix, idMatrix)
+
+    # Counter for indices
+    count = 0
+
+    id = getIndexList(df, indexList, count)
+    # updating count
+    count = indexList[-1]
+
+    # removing the result of count from indexList
+    del indexList[-1]
+
+    # Slicing not visited matrix
+    # into n number of slices
+    nvArrList = nvArray.tolist()
+
+    # function calls
+    countNv = []
+    countSl = []
+    countNv = getSumSlice(nvArrList, 0)
+    countSl = getSumSlice(adjMatrixList, 0)
+   
+
+    # Empty list for new slices
+    getSlice = []
+
+    # Allows for exit of while loop
+    exSum = sum(countNv)
+
+    # Allows for adding a list of n-length
+    # to be added to adjMatrixList
+    addIndex = 0
+    nList = [0] * num
+
+    # Iterator used for nvArrList
+    numVL = 0
+
+    # Iterator use for iterating through adjMatrix
+    idCount = 0
+
+    # Performs next level operations for AllPath algorthim
+    while exSum != 0:
+        if addIndex != indexList[idCount] - 1:
+            # adds empty list to adjMatrixList
+            adjMatrixList.append(nList)
+            # adds length of list to count
             count += len(nList)
         else:
-            # updating count for non-empty slices
-            updateIndList(nVe, indexList, count)
-            count += len(nList)
-        # getSlice used for next level nv
-        getSlice.append(nVe)
-        # appending adjMatrix
-        adjMatrixList.append(nVe)
-        #  updating iterator for index list
-        idCount += 1
-    # getting next level nv
-    if len(getSlice) == countSl[numVL]:
-        # call getLevel function to update various list
-        getLevelNV(numVL, getSlice, nvArrList, countNv)
-        # updating exit variable
-        exSum = sum(countNv)
-        # updating iterator for countNV and nvArrList
-        if numVL < len(countNv):
-            numVL += 1
-            if numVL == 4:
-                numVL = 0
-    # updating iterator for 1st if statement
-    addIndex += 1
+            # combines n and s slices
+            temp = []
+            temp = iterateList(nvArrList, adjMatrixList, num, indexList[idCount])
+            nv = nvArrList[temp[0]]
+            edge = adjMatrixList[temp[1]]
+            nVe = getAnd(nv, edge)
+            nVe = nVe.tolist()
+            if sum(nVe) == 0:
+                # updating count for empty slices
+                count += len(nList)
+            else:
+                # updating count for non-empty slices
+                updateIndList(nVe, indexList, count)
+                count += len(nList)
+            # getSlice used for next level nv
+            getSlice.append(nVe)
+            # appending adjMatrix
+            adjMatrixList.append(nVe)
+            #  updating iterator for index list
+            idCount += 1
+        # getting next level nv
+        if len(getSlice) == countSl[numVL]:
+            # call getLevel function to update various list
+            oldNV = sum(countNv)
+            getLevelNV(numVL, getSlice, nvArrList, countNv)
 
-# print(f"\nour exit sum is {exit sum}")
+            # This condition is what they call a Spike Solution, it works for now but likely won't hold
+            if (sum(countNv) == oldNV) and countNv[numVL] != 0 and sum(countNv) < num:
+                countNv[numVL] -= 1
+            # updating exit variable
+            exSum = sum(countNv)
+            # updating iterator for countNV and nvArrList
 
-print(f"\nour new adj matrix list is\n {adjMatrixList}")
-print(f"\nour new nv List is of {nvArrList}")
-print(f"\nour index list is {indexList}")
+            if numVL < len(countNv):
+                numVL += 1
+                if numVL == len(countNv):
+                    numVL = 0
+                while countNv[numVL] == 0 and numVL < len(countNv) - 1:
+                    numVL += 1
+
+        # updating iterator for 1st if statement
+        addIndex += 1
+        # This works because it is ABSOLUTELY impossible for an index value to be greater than the Summation of
+        # number of nodes to the number of nodes power, adding every exponent down to node^2
+        if indexList[idCount] > levelSummation(num, num):
+            exSum = 0
+
+    
+    return ""
 
 
 """
@@ -266,3 +319,24 @@ Write new code below this block
 
 
 """
+graphPath = './uploads/graph.csv'
+print(indexGraph(str(graphPath)))
+
+startIncorrect = 1
+while startIncorrect == 1:
+    startNode = sys.argv[1]
+    if int(startNode) < 1 or int(startNode) > num:
+        print("Node not in range")
+        startIncorrect = 1
+    else:
+        startIncorrect = 0
+endIncorrect = 1
+while endIncorrect == 1:
+    endNode = sys.argv[2]
+    if int(endNode) < 1 or int(endNode) > num:
+        print("Node not in range")
+        endIncorrect = 1
+    else:
+        endIncorrect = 0
+
+shortestPath(indexList, num, startNode, endNode)
