@@ -205,12 +205,11 @@ def shortestPath(index, nodes, start, end):
                 if indexNumber % nodes == 0 and level == 1:
                     if int((indexNumber / (nodes ** level))) == int(start):
                         middle = findMiddleNodes(nodes, level, indexNumber)
-                        return "The path is: " + str(start) + ", " + middle + str(end)
+                        return "The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end)
                 else:
                     if int((indexNumber / (nodes ** level)) + 1) == int(start):
                         middle = findMiddleNodes(nodes, level, indexNumber)
-                        return "The path is: " + str(start) + ", " + middle + str(end)
-
+                        return "The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end)
 
 
 def indexGraph(graphName):
