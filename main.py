@@ -327,21 +327,9 @@ def indexGraph(graphName):
 graphPath = './uploads/graph.csv'
 print(indexGraph(str(graphPath)))
 
-startIncorrect = 1
-while startIncorrect == 1:
-    startNode = sys.argv[1]
-    if int(startNode) < 1 or int(startNode) > num:
-        print("Node not in range")
-        startIncorrect = 1
-    else:
-        startIncorrect = 0
-endIncorrect = 1
-while endIncorrect == 1:
-    endNode = sys.argv[2]
-    if int(endNode) < 1 or int(endNode) > num:
-        print("Node not in range")
-        endIncorrect = 1
-    else:
-        endIncorrect = 0
+startNode = sys.argv[1]
+
+endNode = sys.argv[2]
+
 
 shortestPath(indexList, num, startNode, endNode)
