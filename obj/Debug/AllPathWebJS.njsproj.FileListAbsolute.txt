@@ -1,0 +1,9 @@
+E:\SE 342\AllPathWebJS\obj\Debug\AllPathWebJS.njsproj.CoreCompileInputs.cache
+E:\SE 342\AllPathWebJS\bin\Microsoft.NodejsTools.WebRole.dll
+E:\SE 342\AllPathWebJS\obj\Debug\AllPathWebJS.njsprojAssemblyReference.cache
+C:\Users\owner\Documents\SE342\All-Path-main\.vs\AllPathWebJS\obj\Debug\AllPathWebJS.njsproj.AssemblyReference.cache
+C:\Users\owner\Documents\SE342\All-Path-main\.vs\AllPathWebJS\obj\Debug\AllPathWebJS.njsproj.CoreCompileInputs.cache
+C:\Users\owner\Documents\SE342\All-Path-main\.vs\AllPathWebJS\bin\Microsoft.NodejsTools.WebRole.dll
+E:\Fall 21\SE 342\AllPathWebJS\obj\Debug\AllPathWebJS.njsproj.CoreCompileInputs.cache
+E:\Fall 21\SE 342\AllPathWebJS\bin\Microsoft.NodejsTools.WebRole.dll
+E:\Fall 21\SE 342\AllPathWebJS\obj\Debug\AllPathWebJS.njsproj.AssemblyReference.cache

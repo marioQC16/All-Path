@@ -50,7 +50,6 @@
     <Content Include="test.py">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="uploads\graph.csv" />
     <Content Include="views\help.ejs" />
     <Content Include="views\home.ejs">
       <SubType>Code</SubType>
