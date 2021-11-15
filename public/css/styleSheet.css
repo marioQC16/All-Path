@@ -1,0 +1,266 @@
+body {
+    background-color: white;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: initial;
+}
+
+.hold{
+
+
+
+
+
+}
+.page {
+    position: sticky;
+    height: 200px;
+    background-color: #1c2f2f;
+    text-decoration-color: whitesmoke;
+    margin: auto;
+    top: 0;
+    padding: 20px;
+    order: 2;
+}
+.main {
+    background-color: white;
+    width: 70%;
+    height: unset;
+    padding: 20px;
+    margin: auto;
+    order: 2;
+}
+
+h1 {
+    font-family: 'Montserrat', serif;
+    font-size: 3vw;
+    text-align: center;
+    color: whitesmoke;
+    top: 0;
+}
+h2 {
+    text-align: center;
+    font-size: 2vw;
+    color: whitesmoke;
+    font-family: 'Lato', serif;
+}
+h3{
+    text-align: left;
+    font-size: 3vw;
+    font-weight:bold;
+    font-family: 'Hind Madura', serif;
+}
+.nav {
+    display: inline-grid;
+    height: 20%;
+    width: 90%;
+    transition: width 0.2s;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+.nav--border {
+    display: inline-grid;
+    position: absolute;
+    width: inherit;  
+}
+
+.nav--link {
+    display: flex;
+    align-items: center;
+    color: whitesmoke;
+    text-decoration: none;
+    flex-direction: row;
+    font-size: 2vw;
+}
+
+.nav--link:hover {
+    background-color: #dddddd;
+    color: black;
+    
+}
+
+.nav--icon-container {
+    width: 50px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.nav__label {
+    white-space: nowrap;
+}
+
+.help {
+    display: flex;
+    width: 100%;
+    height: 18px;
+    position: relative;
+    justify-content:flex-end;
+    transition: width 0.2s;
+}
+
+.help--link {
+    display: flex;
+    align-items: center;
+    color: whitesmoke;
+    text-decoration: none;
+    font-size: 2vw;
+}
+
+.help--link:hover {
+    background-color: #dddddd;
+    color: black;
+    background-size: 2vw;
+}
+
+.help--icon-container {
+    width: 50px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.help__label {
+    white-space: nowrap;
+}
+
+
+li {
+    display: inline;
+    list-style: none;
+    margin: 150px;
+    color: black;
+}
+
+ul {
+    display: inline-flex;
+    width:100%;
+    text-align: left;
+}
+
+p {
+    /*text-align: center;*/
+    color: black;
+    line-height: 2;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-family: 'Hind Madura', serif;
+}
+
+div.a{
+    text-indent: 20px;
+}
+
+pre code {
+    background-color: #eee;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+}
+
+code{
+    font-size: 15px;
+}
+
+#run {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#box {
+    text-align: center;
+    color: black;
+    width: auto;
+}
+
+input[type="file"] {
+    
+
+   
+}
+
+.fileUpload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+    font-family: 'Scheherazade New', serif;
+}
+
+.button {
+    height: 25px;
+    width: 180px;
+}
+
+.material-icons {
+    font-size: 32px !important;
+}
+.alert {
+    text-align: center;
+    font-size: inherit;
+   
+}
+
+.alert-warning {
+    color: red;
+    text-decoration-color: red;
+    text-align: center;
+}
+
+.alert-success {
+    color: green;
+    text-align: center;
+}
+.path {
+    text-align: center;
+}
+.fileUpload:focus + label {
+    outline: 1px dotted;
+    outline: -webkit-focus-ring-color auto 5px;
+}
+.fileUpload + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: black;
+    display: inline-block;
+    cursor: grab;
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+    background-color: white;
+    border: 1px solid black;
+    padding: 0px 12px;
+    align-content: center;
+    height: auto;
+    width: fit-content;
+}
+.fileUpload + label * {
+        pointer-events: none;
+    }
+
+.fileUpload:focus + label, .fileUpload:hover {
+        background-color: whitesmoke;
+    }
+
+.js .fileUpload {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.no-js .fileUpload + label {
+    display: none;
+}
