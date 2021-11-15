@@ -168,21 +168,18 @@ def getLevelNV(numVL, getSlice, nvArrList, countNv):
                 countNv[numVL] = sum(newNVSlice)
             nvArrList[numVL] = newNVSlice
 
-
 # Finds the nodes in between start and end
 def findMiddleNodes(nodes, currentLevel, indexNumber):
     middleString = ""
     middleNumber = 0
-    numerator = 0
     while currentLevel > 1:
-        numerator = (indexNumber % (nodes ** currentLevel))
-        middleNumber = int((numerator / (nodes ** (currentLevel - 1))) + 1)
-        if (currentLevel == 2 and (numerator % nodes) == 0):
-            middleNumber -= 1
+        middleNumber = int(((indexNumber % (nodes ** currentLevel)) / (nodes ** (currentLevel - 1))) + 1)
         middleString += str(middleNumber)
         middleString += ", "
         currentLevel -= 1
     return middleString
+
+
 
 
 # Finds the shortest path from one node to another
@@ -210,6 +207,8 @@ def shortestPath(index, nodes, start, end):
                     if int((indexNumber / (nodes ** level)) + 1) == int(start):
                         middle = findMiddleNodes(nodes, level, indexNumber)
                         print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end))
+
+
 
 
 def indexGraph(graphName):
@@ -248,6 +247,7 @@ def indexGraph(graphName):
     countSl = []
     countNv = getSumSlice(nvArrList, 0)
     countSl = getSumSlice(adjMatrixList, 0)
+   
 
     # Empty list for new slices
     getSlice = []
@@ -300,6 +300,7 @@ def indexGraph(graphName):
             oldNV = sum(countNv)
             getLevelNV(numVL, getSlice, nvArrList, countNv)
 
+            # This condition is what they call a Spike Solution, it works for now but likely won't hold
             if (sum(countNv) == oldNV) and countNv[numVL] != 0 and sum(countNv) < num:
                 countNv[numVL] -= 1
             # updating exit variable
@@ -315,20 +316,25 @@ def indexGraph(graphName):
 
         # updating iterator for 1st if statement
         addIndex += 1
-        # This works because an index value cannot be greater than the Summation of
+        # This works because it is ABSOLUTELY impossible for an index value to be greater than the Summation of
         # number of nodes to the number of nodes power, adding every exponent down to node^2
         if indexList[idCount] > levelSummation(num, num):
             exSum = 0
 
+    
     return ""
 
 
+"""
+Write new code below this block
+
+
+"""
 graphPath = './uploads/graph.csv'
 print(indexGraph(str(graphPath)))
+startNode = int(sys.argv[1])
 
-startNode = sys.argv[1]
-
-endNode = sys.argv[2]
+endNode = int(sys.argv[2])
 
 
 shortestPath(indexList, num, startNode, endNode)

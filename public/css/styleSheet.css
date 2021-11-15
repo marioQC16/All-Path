@@ -23,6 +23,7 @@ body {
     top: 0;
     padding: 20px;
     order: 2;
+    z-index: 300;
 }
 .main {
     background-color: white;
@@ -38,11 +39,51 @@ h1 {
     text-align: center;
     color: whitesmoke;
     top: 0;
+    margin-block-start: -0.33em;
 }
 h2 {
     text-align: center;
     color: whitesmoke;
     font-family: 'Scheherazade New', serif;
+    font-size: 30px;
+   
+}
+h3 {
+    text-align: center;
+    color: black;
+    font-family: 'Scheherazade New', serif;
+    font-size: 26px;
+    font-style:italic;
+}
+h4 {
+    text-align: left;
+    color: black;
+    font-family: 'Scheherazade New', serif;
+    font-size: 21px;
+    font-style: italic;
+}
+
+li {
+    display: inline;
+    list-style: none;
+    margin: 150px;
+    color: black;
+}
+
+ul {
+    display: inline-flex;
+    width: 100%;
+    text-align: left;
+}
+
+p {
+    text-align: center;
+    color: black;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-family: 'Scheherazade New', serif;
+    font-weight: bold;
 }
 .nav {
     display: inline-grid;
@@ -117,30 +158,6 @@ h2 {
 
 .help__label {
     white-space: nowrap;
-}
-
-
-li {
-    display: inline;
-    list-style: none;
-    margin: 150px;
-    color: black;
-}
-
-ul {
-    display: inline-flex;
-    width:100%;
-    text-align: left;
-}
-
-p {
-    text-align: center;
-    color: black;
-    font-size: 20px;
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-family: 'Scheherazade New', serif;
-    font-weight: bold;
 }
 
 #run {
@@ -236,4 +253,21 @@ input[type="file"] {
 
 .no-js .fileUpload + label {
     display: none;
+}
+
+.instructions {
+    align-content: flex-start;
+    font-family: 'Scheherazade New', serif;
+    font-weight: bold;
+    text-align: left;
+    color: black;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+
+.img {
+    width: 500px;
+    height: 120px;
 }

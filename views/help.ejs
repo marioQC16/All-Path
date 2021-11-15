@@ -5,6 +5,7 @@
 		<meta charset="utf-8" / >
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" >
 		<title > All Path Algorithm </title >
+		<script src="https://code.jquery.com/jquery-1.11.1.js">     </script>
 		<link rel="preconnect" href="https://fonts.googleapis.com" >
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 		<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet" >
@@ -53,37 +54,84 @@
 		</div >
 
 		<div class="main" >
-			<p > User manual and Common Q&A <p/ >
-			<p > <a href="https://github.com/marioQC16/All-Path/blob/AllPathWebJS/demo%20file.csv" > Download demo graph file </a > </p >
-			<p >
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-				incididunt ut labore et dolore magna aliqua. Duis at consectetur lorem donec massa
-				sapien faucibus et. Maecenas sed enim ut sem viverra aliquet eget sit. Commodo viverra
-				maecenas accumsan lacus vel facilisis volutpat. Non pulvinar neque laoreet suspendisse
-				interdum. Egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris.
-				Mauris pellentesque pulvinar pellentesque habitant morbi. Elementum nisi quis eleifend
-				quam adipiscing vitae proin sagittis. Maecenas sed enim ut sem viverra aliquet eget.
-				Quis hendrerit dolor magna eget est lorem ipsum. Sagittis orci a scelerisque purus semper
-				eget duis. Donec et odio pellentesque diam.
-			</p >
+			<h3 > User manual </h3 >
+			
+			<div class=instructions>
+			
+				<h4>To use the all path finding algorithm web app to find the shortest path 
+				follow the following steps</h4>
+			
+				1. Navigate to the 'Demo Page'  
+				<br>
+				<img src = "/images/demonav.jpeg"  alt=”demo naviagation” class="img">
+				<br><br>
+				2. Select a graph file from your file explorer named 'graph.csv'.
+				
+					you can download a sample graph.csv file from here
+					<form ref='uploadForm' id='uploadForm' action='/download'  method='post' encType="multipart/form-data">
+					<input type="submit" id="btn" $window.open('/download/graph.csv');>Download graph</button>
+					<br>
+					</form>
+				<br><br>
+				3. Upload the graph file to the system using 'Upload' button
+				<br>
+				   a success message as shown above will display if file is succesfully uploaded
+				   <br>
+				   <br>
+				<img src = "/images/uploadsuccess.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br><br>
+				4. Run the program using the 'Run program' button
+				<br>
+				<img src = "/images/run-btn.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br><br>
+				5. Enter a Start Node in the text box provided
+				<br>
+				<img src = "/images/startNodetxtbx.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br><br>
+				6. Enter an End Node in the text box provided
+				<br>
+				<img src = "/images/endNodetxtbx.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br><br>
+				7. Click the search button to display the shortest path.
+				<br>
+				<img src = "/images/searchBtn.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br><br>
+			
+			<h3>Error list</h3>
+				<h4>The following are errors displayed when running the All Path Algorithm webapp and how to solve them</h4>
+				
+				1. Kindly select a file to upload
+				<br>
+				<img src = "/images/uploaderr.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br>
+				<br>
+				soln: select a graph.csv file from your file explorer to upload
+				<br><br>
+				2. Kindly upload a graph file to run the program
+				<br>
+				<img src = "/images/runerr.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br>
+				<br>
+				soln: Upload a graph file successfuly to run the program.
+				<br><br>
 
-			<div id="box" >
-				<label for="file-upload" class="custom-file-upload">
-					<p> <i class="material-icons" > upload_file </i></p>
-					<p> Drag and drop a file or click to upload a graph from file explorer </p>
-				</label >
-				<input id="file-upload" type="file" / >
-			</div >
-
-			<p >
-				<div id="run" >
-					<button class="button" id='script' >
-						<a href="/output" > Run All Path Algorithm </a >
-					</button >
-				</div >
-			</p >
-			</div>
-		</div >
+				3. Enter a Start node and End node to search for the shortest path
+				<br>
+				<img src = "/images/emptyNoderr.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br>
+				<br>
+				soln: User must enter both a 'Start Node' and 'End Node' to the respective input fields to search for the shortest path
+				<br><br>
+				4. graph.csv file has been reset. Navigate to the Demo Page and Upload a new graph.csv file
+				<br>
+				<img src = "/images/reseterr.JPG" width=” “ height=” “ alt=”demo naviagation” class="img">
+				<br>
+				<br>
+				soln: Navigate to the Demo Page and Upload a new graph.csv file
+				<br>
+			
+			</div
+			
 	</body >
 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 
