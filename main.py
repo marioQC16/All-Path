@@ -187,25 +187,29 @@ def findMiddleNodes(nodes, currentLevel, indexNumber):
 
 # Finds the shortest path from one node to another
 def shortestPath(index, nodes, start, end):
-    for i in range(len(index)):
-        level = checkLevel(index[i], nodes)
-        if level == 0:
-            level = 1
-        levelSum = levelSummation(level, nodes)
-        indexNumber = index[i] - levelSum
-        mod = (indexNumber % nodes)
-        if mod == 0:
-            mod = nodes
-        if int(mod) == int(end):
-            if indexNumber % nodes == 0 and level == 1:
-                if int((indexNumber / (nodes ** level))) == int(start):
-                    middle = findMiddleNodes(nodes, level, indexNumber)
-                    return "The path is: " + str(start) + ", " + middle + str(end)
-            else:
-                if int((indexNumber / (nodes ** level)) + 1) == int(start):
-                    middle = findMiddleNodes(nodes, level, indexNumber)
-                    return "The path is: " + str(start) + ", " + middle + str(end)
-
+    if(end < 1 or end > num):
+        print("The Ending node is not in range of the graph")
+    elif(start < 1 or start > num):
+        print("The Starting node is not in range of the graph")
+    else:
+        for i in range(len(index)):
+            level = checkLevel(index[i], nodes)
+            if level == 0:
+                level = 1
+            levelSum = levelSummation(level, nodes)
+            indexNumber = index[i] - levelSum
+            mod = (indexNumber % nodes)
+            if mod == 0:
+                mod = nodes
+            if int(mod) == int(end):
+                if indexNumber % nodes == 0 and level == 1:
+                    if int((indexNumber / (nodes ** level))) == int(start):
+                        middle = findMiddleNodes(nodes, level, indexNumber)
+                        print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end))
+                else:
+                    if int((indexNumber / (nodes ** level)) + 1) == int(start):
+                        middle = findMiddleNodes(nodes, level, indexNumber)
+                        print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end))
 
 
 def indexGraph(graphName):
@@ -322,21 +326,9 @@ def indexGraph(graphName):
 graphPath = './uploads/graph.csv'
 print(indexGraph(str(graphPath)))
 
-startIncorrect = 1
-while startIncorrect == 1:
-    startNode = sys.argv[1]
-    if int(startNode) < 1 or int(startNode) > num:
-        print("Node not in range")
-        startIncorrect = 1
-    else:
-        startIncorrect = 0
-endIncorrect = 1
-while endIncorrect == 1:
-    endNode = sys.argv[2]
-    if int(endNode) < 1 or int(endNode) > num:
-        print("Node not in range")
-        endIncorrect = 1
-    else:
-        endIncorrect = 0
+startNode = sys.argv[1]
+
+endNode = sys.argv[2]
+
 
 shortestPath(indexList, num, startNode, endNode)
