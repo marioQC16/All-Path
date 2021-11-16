@@ -174,18 +174,18 @@ p {
 
 input[type="file"] {
     
-
+    opacity:0;
    
 }
 
-.fileUpload {
+.custom-file-upload {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
     overflow: hidden;
     position: absolute;
-    z-index: -1;
     font-family: 'Scheherazade New', serif;
+    z-index: -1;
 }
 
 .button {
@@ -215,11 +215,11 @@ input[type="file"] {
 .path {
     text-align: center;
 }
-.fileUpload:focus + label {
+.custom-file-upload:focus + label {
     outline: 1px dotted;
     outline: -webkit-focus-ring-color auto 5px;
 }
-.fileUpload + label {
+.custom-file-upload + label {
     font-size: 1.25em;
     font-weight: 700;
     color: black;
@@ -233,16 +233,18 @@ input[type="file"] {
     align-content: center;
     height: auto;
     width: fit-content;
+
 }
-.fileUpload + label * {
+    .custom-file-upload + label * {
         pointer-events: none;
     }
 
-.fileUpload:focus + label, .fileUpload:hover {
-        background-color: whitesmoke;
-    }
+.custom-file-upload:focus + label, 
+.custom-file-upload + label:hover {
+    background-color: #808080;
+}
 
-.js .fileUpload {
+.js .custom-file-upload {
     width: 0.1px;
     height: 0.1px;
     opacity: 0;
@@ -251,7 +253,7 @@ input[type="file"] {
     z-index: -1;
 }
 
-.no-js .fileUpload + label {
+.no-js .custom-file-upload + label {
     display: none;
 }
 

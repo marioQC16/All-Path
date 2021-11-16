@@ -71,12 +71,13 @@
 
 		<form ref='uploadForm' id='uploadForm' action='/upload'  method='post' encType="multipart/form-data">
 			<div id="box" >
-			<input id="fileUpload" type="file" name="file" class="fileUpload" data-multiple-caption="{count} files selected" multiple/ >
-				<label for="fileUpload" >
+			<input id="fileUpload" type="file" name="file" class="custom-file-upload" data-multiple-caption="{count} files selected" multiple/ >
+				<label for="fileUpload" ><span>
 					<p> <i class="material-icons" > upload_file </i></p>
 					<p> Drag and drop a file or click to upload a graph from file explorer </p>
+					</span>
 				</label >
-				
+
 			</div >
 
 			
@@ -126,6 +127,7 @@
         
 	   </div>
 	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	 <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
 <script>
   function addDarkmodeWidget() {
@@ -150,7 +152,7 @@
 
 <script>
 
-var inputs = document.querySelectorAll( '.fileUpload' );
+var inputs = document.querySelectorAll( '.custom-file-upload' );
 Array.prototype.forEach.call( inputs, function( input )
 {
 	var label	 = input.nextElementSibling,
@@ -162,7 +164,7 @@ Array.prototype.forEach.call( inputs, function( input )
 		if( this.files && this.files.length > 1 )
 			fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
 		else
-			fileName = e.target.value.split( '\' ).pop();
+			fileName = e.target.value.split( '\\' ).pop();
 
 		if( fileName )
 			label.querySelector( 'span' ).innerHTML = fileName;
@@ -170,6 +172,7 @@ Array.prototype.forEach.call( inputs, function( input )
 			label.innerHTML = labelVal;
 	});
 });
+
 </script>
 
 </html>

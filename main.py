@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import requests
 import sys
+import glob
 
 
 def initialSetup(graphFile):
@@ -330,8 +331,9 @@ Write new code below this block
 
 
 """
-graphPath = './uploads/graph.csv'
-print(indexGraph(str(graphPath)))
+newest = min(glob.iglob('./uploads/*.csv'), key=os.path.getctime)
+
+print(indexGraph(newest))
 startNode = int(sys.argv[1])
 
 endNode = int(sys.argv[2])

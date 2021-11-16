@@ -7,8 +7,10 @@ const fs = require('fs');
 const fileUpload = require('express-fileupload');
 const bodyParser = require("body-parser");
 const { PythonShell } = require('python-shell');
-const http = require('http')
-const cors = require("cors");
+const path = require('path');
+const http = require('http');
+var typeis = require('type-is');
+
 
 //static files
 app.use(express.static('public'));
@@ -51,36 +53,54 @@ app.post("/upload", (req, res) => {
         if (!req.files) {
             return res.render('demo', { alert: "Kindly select a file to upload" });
         }
-    
+
         const file = req.files.file;
         const path = __dirname + "/uploads/" + file.name;
-
         // move file to uploads directory to pass to python script]
-        file.mv(path, (err) => {
-            if (err) {
-                return res.render('demo', { alert: "File upload unsuccessful, kindly try again" });
-            }
-            return res.render('demo', { alertg: "File successfully uploaded! Run the algorithm" });
+    file.mv(path, (err) => {
+
+        if (err) {
+            return res.render('demo', { alert: "File upload unsuccessful, kindly try again" });
+        } else {
+            return res.render('demo', { alertg: file.name + " successfully uploaded! Run the algorithm" });
+        }   
         });
 });
 
 //reset graph file to allow new one 
 app.post("/reset", (req, res) => {
    // graph file location
-    const fil = './uploads/graph.csv';
-   // unlink graph from project
-    fs.unlink(fil, (err) => {
-        if (err) {
-            return res.render('output', { reseterror:"graph.csv file has been reset. Navigate to the Demo Page and Upload a new graph.csv file"});
+    const directory = './uploads/';
+
+    fs.readdir(directory, (err, files) => {
+        if (!files.length) {
+
+            return res.render('output', { reset: "File has been successfully reset. Navigate to the Demo Page and Upload a new file" });
         } else {
-            return res.render('output', { reset: "file successfully deleted. Navigate to the 'Demo Page' to upload a new file" });
+            for (const file of files) {
+                fs.unlink(path.join(directory, file), (err) => {
+                    if (err) {
+                        return res.render('output', {reseterror: "No file to reset. " });
+                    } else {
+                        return res.render('output', { reset: "File has been successfully reset. Navigate to the 'Demo Page' to upload a new file" });
+
+                    }
+                });
+            }
         }
+        
     });
+
+   // unlink graph from project
+    
 });
 //download
 
 app.get("/download", (req, res) => {
-    res.download('/download/graph.csv')
+    var filePath = './download/'; // Or format the path using the `id` rest param
+    var fileName = 'graph.csv'; // The default name the browser will use
+
+    res.download(filePath, fileName);
 })
 // python connection
 app.post("/shortest", (req, res) => {
@@ -149,8 +169,13 @@ app.listen(port, () => console.info(`App listening on port ${port}`));
 
 
 
+/*
+ * const fileType = typeis(req, ['csv'])
+        if (fileType) {
 
-
+            return res.render('demo', { alert: " Invalid file type. Upload a '.csv' file" });
+        }
+        */
 
 
 
