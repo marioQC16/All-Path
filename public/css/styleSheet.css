@@ -7,22 +7,17 @@ body {
     margin: initial;
 }
 
-.hold{
-
-
-
-
-
-}
 .page {
     position: sticky;
-    height: 200px;
+    height:90px;
+    width: auto;
     background-color: #1c2f2f;
     text-decoration-color: whitesmoke;
     margin: auto;
     top: 0;
     padding: 20px;
     order: 2;
+    z-index:99;
 }
 .main {
     background-color: white;
@@ -35,25 +30,31 @@ body {
 
 h1 {
     font-family: 'Montserrat', serif;
-    font-size: 3vw;
+    font-size: 20px;
+    line-height: 0px;
+    height:0;
     text-align: center;
     color: whitesmoke;
     top: 0;
 }
 h2 {
+    
     text-align: center;
-    font-size: 2vw;
+    line-height: 30px;
+    width: auto;
+    height: 10%;
+    font-size: 15px;
     color: whitesmoke;
     font-family: 'Lato', serif;
 }
 h3{
     text-align: left;
-    font-size: 3vw;
+    font-size: 2vw;
     font-weight:bold;
     font-family: 'Hind Madura', serif;
 }
 .nav {
-    display: inline-grid;
+    /*display: inline-grid;*/
     height: 20%;
     width: 90%;
     transition: width 0.2s;
@@ -63,6 +64,7 @@ h3{
 
 .nav--border {
     display: inline-grid;
+    line-height: 20px;
     position: absolute;
     width: inherit;  
 }
@@ -70,13 +72,16 @@ h3{
 .nav--link {
     display: flex;
     align-items: center;
+    line-height:40px;
     color: whitesmoke;
     text-decoration: none;
     flex-direction: row;
-    font-size: 2vw;
+    font-size: 30px;
 }
 
 .nav--link:hover {
+    line-height: normal;
+    height: normal;
     background-color: #dddddd;
     color: black;
     
@@ -131,6 +136,13 @@ h3{
     white-space: nowrap;
 }
 
+img{
+    display: block;
+    border: 1px solid #000;
+    margin: auto;
+    width:50%;
+
+}
 
 li {
     display: inline;
@@ -155,12 +167,13 @@ p {
     font-family: 'Hind Madura', serif;
 }
 
-div.a{
-    text-indent: 20px;
-}
+
 
 pre code {
+    height: relative;
     background-color: #eee;
+    overflow-x: auto;
+    tab-size:1;
     border: 1px solid #999;
     display: block;
     padding: 20px;
@@ -251,7 +264,16 @@ input[type="file"] {
 .fileUpload:focus + label, .fileUpload:hover {
         background-color: whitesmoke;
     }
+.help{
+    margin-left: 20px;
+}
 
+.img{
+    width: auto;
+    text-align: center;
+
+}
+    
 .js .fileUpload {
     width: 0.1px;
     height: 0.1px;
@@ -263,4 +285,8 @@ input[type="file"] {
 
 .no-js .fileUpload + label {
     display: none;
+}
+
+.tables{
+    text-align: center;
 }
