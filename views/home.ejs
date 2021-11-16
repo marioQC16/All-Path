@@ -52,92 +52,77 @@
 
 		<div class="main" >
 
-        <p>~program decription~</p>
+       <h3>Abstract</h3>
 	   	<p> 
-		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-		incididunt ut labore et dolore magna aliqua. Duis at consectetur lorem donec massa 
-		sapien faucibus et. Maecenas sed enim ut sem viverra aliquet eget sit. Commodo viverra 
-		maecenas accumsan lacus vel facilisis volutpat. Non pulvinar neque laoreet suspendisse 
-		interdum. Egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris. 
-		Mauris pellentesque pulvinar pellentesque habitant morbi. Elementum nisi quis eleifend 
-		quam adipiscing vitae proin sagittis. Maecenas sed enim ut sem viverra aliquet eget. 
-		Quis hendrerit dolor magna eget est lorem ipsum. Sagittis orci a scelerisque purus semper 
-		eget duis. Donec et odio pellentesque diam.
+		This algorithm uses vertical data structures to find all length paths (including shortest paths) for pairs of vertices in a graph.
+		It then stores them into a multilevel bit vector tree (MBVT). This MBVT allows a faster computation time from one vector to another by the use of indexs. 
+		This algorithm also allows the addition or removal of any edge or node without needing to re-generate the tree. The algorithm is more suited to distributed processing.
 		</p>
 
-		<p>
-		Porta non pulvinar neque laoreet suspendisse interdum consectetur libero. Neque gravida 
-		in fermentum et sollicitudin ac orci phasellus. Fames ac turpis egestas maecenas pharetra 
-		convallis. Orci sagittis eu volutpat odio facilisis mauris. Sollicitudin ac orci phasellus 
-		egestas tellus rutrum tellus pellentesque eu. Commodo ullamcorper a lacus vestibulum sed arcu 
-		non. Placerat orci nulla pellentesque dignissim. Ac odio tempor orci dapibus ultrices in iaculis. 
-		Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Ipsum dolor sit amet 
-		consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit pellentesque habitant 
-		morbi. Pretium nibh ipsum consequat nisl vel pretium. Enim nec dui nunc mattis. Magna fringilla 
-		urna porttitor rhoncus dolor purus non enim praesent. Pellentesque nec nam aliquam sem. Auctor 
-		elit sed vulputate mi. Consequat ac felis donec et odio pellentesque diam. Dictum varius duis at 
-		consectetur lorem donec massa. Habitasse platea dictumst quisque sagittis. At tellus at urna 
-		condimentum mattis.
+		<h3>How it works</h3>
 		
-		</p>
 		<p> 
-		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-		incididunt ut labore et dolore magna aliqua. Duis at consectetur lorem donec massa 
-		sapien faucibus et. Maecenas sed enim ut sem viverra aliquet eget sit. Commodo viverra 
-		maecenas accumsan lacus vel facilisis volutpat. Non pulvinar neque laoreet suspendisse 
-		interdum. Egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris. 
-		Mauris pellentesque pulvinar pellentesque habitant morbi. Elementum nisi quis eleifend 
-		quam adipiscing vitae proin sagittis. Maecenas sed enim ut sem viverra aliquet eget. 
-		Quis hendrerit dolor magna eget est lorem ipsum. Sagittis orci a scelerisque purus semper 
-		eget duis. Donec et odio pellentesque diam.
+		Step 1:
+		Obtain bit vectors from adjacency matrix and label them. <br>
+		Step 2: 
+		Apply a combination of breadth-first approach and logical operators to further explore existing paths.<br>
+		Step 3: 
+		The algorithm explores until there are no new paths to be found and then grouped into levels forming a multilevel path tree. <br>
+		Step 4:
+		The paths explored are then indexed and stored in a list to enable faster lookup. <br>
+		Step 5:	
+		The shortest-paths can be found by querying the list that was created. <br> <br>
+
+		Here is the psudocode on how it works: <br>
+		<pre>
+			<code>
+	ShortestPath (int Indexes, int VL*, int source, int dest) { 
+		For each value in Indexes:
+		    Calculate current level from the index 
+		    Calculate K from value % VL 
+
+		    IF K equals dest THEN 
+		        Calculate H from value / VLcurrentlevel +1
+
+		        IF H equals source THEN 
+		            Calculate intermediatePath (int VL, int currentlevel, int index) 
+		            Print Shortest Path //i.e. H, intermediatePath and K 
+		        ELSE break
+
+		    ELSE break 
+		    Read Next value from Indexes 
+		END For 
+	}
+			</code>			
+		</pre>
+		 <p>*VL is the Vector Length, also known as number of vertices in the graph </p>
 		</p>
 
-		<p>
-		Porta non pulvinar neque laoreet suspendisse interdum consectetur libero. Neque gravida 
-		in fermentum et sollicitudin ac orci phasellus. Fames ac turpis egestas maecenas pharetra 
-		convallis. Orci sagittis eu volutpat odio facilisis mauris. Sollicitudin ac orci phasellus 
-		egestas tellus rutrum tellus pellentesque eu. Commodo ullamcorper a lacus vestibulum sed arcu 
-		non. Placerat orci nulla pellentesque dignissim. Ac odio tempor orci dapibus ultrices in iaculis. 
-		Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Ipsum dolor sit amet 
-		consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit pellentesque habitant 
-		morbi. Pretium nibh ipsum consequat nisl vel pretium. Enim nec dui nunc mattis. Magna fringilla 
-		urna porttitor rhoncus dolor purus non enim praesent. Pellentesque nec nam aliquam sem. Auctor 
-		elit sed vulputate mi. Consequat ac felis donec et odio pellentesque diam. Dictum varius duis at 
-		consectetur lorem donec massa. Habitasse platea dictumst quisque sagittis. At tellus at urna 
-		condimentum mattis.
-		
-		</p>
-		<p> 
-		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-		incididunt ut labore et dolore magna aliqua. Duis at consectetur lorem donec massa 
-		sapien faucibus et. Maecenas sed enim ut sem viverra aliquet eget sit. Commodo viverra 
-		maecenas accumsan lacus vel facilisis volutpat. Non pulvinar neque laoreet suspendisse 
-		interdum. Egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris. 
-		Mauris pellentesque pulvinar pellentesque habitant morbi. Elementum nisi quis eleifend 
-		quam adipiscing vitae proin sagittis. Maecenas sed enim ut sem viverra aliquet eget. 
-		Quis hendrerit dolor magna eget est lorem ipsum. Sagittis orci a scelerisque purus semper 
-		eget duis. Donec et odio pellentesque diam.
-		</p>
+		<h3>Time Comparison</h3>
+		<div class=img>
+			<img src = "/images/Time.png">
+		</div>
 
-		<p>
-		Porta non pulvinar neque laoreet suspendisse interdum consectetur libero. Neque gravida 
-		in fermentum et sollicitudin ac orci phasellus. Fames ac turpis egestas maecenas pharetra 
-		convallis. Orci sagittis eu volutpat odio facilisis mauris. Sollicitudin ac orci phasellus 
-		egestas tellus rutrum tellus pellentesque eu. Commodo ullamcorper a lacus vestibulum sed arcu 
-		non. Placerat orci nulla pellentesque dignissim. Ac odio tempor orci dapibus ultrices in iaculis. 
-		Cursus metus aliquam eleifend mi in nulla posuere sollicitudin aliquam. Ipsum dolor sit amet 
-		consectetur adipiscing elit. Dolor sit amet consectetur adipiscing elit pellentesque habitant 
-		morbi. Pretium nibh ipsum consequat nisl vel pretium. Enim nec dui nunc mattis. Magna fringilla 
-		urna porttitor rhoncus dolor purus non enim praesent. Pellentesque nec nam aliquam sem. Auctor 
-		elit sed vulputate mi. Consequat ac felis donec et odio pellentesque diam. Dictum varius duis at 
-		consectetur lorem donec massa. Habitasse platea dictumst quisque sagittis. At tellus at urna 
-		condimentum mattis.
-		
-		</p>
+		<p class=tables> Table 1: Big O Notation comparison between the algorithms</p>
+		<div class=img>
+			<img src = "/images/GraphExample.png">
+		</div>
+		<p class=tables>Figure 1: Graphs that are used as examples </p> <br>
 
+		<div class=img>
+			<img src = "/images/Continuation.png">
+		</div>
+		<p class=tables> Figure 2: Start-up time using the graphs from 
+			Figure 1 with each respective algorithm
+		</p><br>
+
+		<div class=img>
+			<img src = "/images/Startup.png">
+		</div>
+		<p class=tables> Figure 3: Search time using the graphs from Figure 1
+			with each respective algorithm
+		</p><br>
+     
         
 	   </div>
 	   </div>

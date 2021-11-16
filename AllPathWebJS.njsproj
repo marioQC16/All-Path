@@ -70,6 +70,7 @@
     <Folder Include="node_modules\multer\" />
     <Folder Include="node_modules\multer\lib\" />
     <Folder Include="node_modules\multer\storage\" />
+    <Folder Include="public\download\" />
     <Folder Include="uploads\" />
     <Folder Include="views\" />
     <Folder Include="public\" />

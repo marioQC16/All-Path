@@ -54,13 +54,16 @@
 
 		<div class="main" >
 	   
-			
-		<p> The algorithm ran successfully! </p>
+			<div id="center" >
+		<p> The program ran successfully! </p>
 		<p> You can now search for the shortest path </p>
 
 	   	</p>
 		<form ref='SForm' id='SForm' action='/shortest'  method='post' encType="multipart/form-data"> 
-	   	<p>To find the shortest path from one node to another from the graph file, Enter the initial node and the destination node</p>
+	   	<p>To find the shortest path from one node to another from 
+		'<%   if(typeof fil2 != "undefined" && fil2)      { %>
+		  <%=  fil2  %>
+		  <% }    %>', Enter the initial node and the destination node</p>
 
 	   	<p>
 	   		Start Node : <input type="text"  size="12" value="" name="Snode" id="Snode">
@@ -98,11 +101,13 @@
 			 <% }    %>
 			<br><br>
 			
+
+			<p> Reset the graph file to upload another one to run the algorithm on using the button below  
 			</form>
 			
 			 <form action='/reset' method='post' encType="multipart/form-data">
 			<div id="run">
-			<p>
+			
 			 <input type="submit" value="Reset graph file" id="reset"/> 
 				 </p>
 				
@@ -125,6 +130,7 @@
 			</div> 
 		  <% }    %>
        </p>
+	   </div>
 	   </div>
 	</body>
 

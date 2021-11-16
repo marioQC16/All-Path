@@ -56,29 +56,25 @@
 
 		<div class="main" >
 
-       <p> 
+        <h3>How to use</h3>	
+		<div id="center" >
+       <p> 		
+		Step 1 
+		<br>
+		Upload a graph file below <br>
 		
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor 
-		incididunt ut labore et dolore magna aliqua. Duis at consectetur lorem donec massa 
-		sapien faucibus et. Maecenas sed enim ut sem viverra aliquet eget sit. Commodo viverra 
-		maecenas accumsan lacus vel facilisis volutpat. Non pulvinar neque laoreet suspendisse 
-		interdum. Egestas pretium aenean pharetra magna ac placerat vestibulum lectus mauris. 
-		Mauris pellentesque pulvinar pellentesque habitant morbi. Elementum nisi quis eleifend 
-		quam adipiscing vitae proin sagittis. Maecenas sed enim ut sem viverra aliquet eget. 
-		Quis hendrerit dolor magna eget est lorem ipsum. Sagittis orci a scelerisque purus semper 
-		eget duis. Donec et odio pellentesque diam.
-		</p>
+	   </p>
 
 		<form ref='uploadForm' id='uploadForm' action='/upload'  method='post' encType="multipart/form-data">
-			<div id="box" >
+			
 			<input id="fileUpload" type="file" name="file" class="custom-file-upload" data-multiple-caption="{count} files selected" multiple/ >
 				<label for="fileUpload" ><span>
 					<p> <i class="material-icons" > upload_file </i></p>
 					<p> Drag and drop a file or click to upload a graph from file explorer </p>
 					</span>
 				</label >
-
-			</div >
+				<br>
+		
 
 			
 			<div id="run">
@@ -104,9 +100,20 @@
 			</div> 
 		  <% }    %>
 
+		  <br><br>
+		  <p>
+		  
+		   <%   if(typeof partii != "undefined" && partii)      { %>
+		   <%=  partii  %> <br>
 
-
-
+		  Run the algorithm on
+		  
+		  '<%   if(typeof fil != "undefined" && fil)      { %>
+		  <%=  fil  %>
+		  <% }    %>'
+		  
+		  using the 'Run program' button below 
+		  </p>
 		<p>
 		<form action='/run' method='post' encType="multipart/form-data">
 			<div id="run">
@@ -123,8 +130,9 @@
 			</div> 
 		  <% }    %>
 			 
-
-        
+			<% }    %>
+			</p>
+        </div>
 	   </div>
 	</body>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

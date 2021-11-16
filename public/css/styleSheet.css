@@ -51,7 +51,7 @@ h2 {
 h3 {
     text-align: center;
     color: black;
-    font-family: 'Scheherazade New', serif;
+    font-family: 'Hind Madura', serif;
     font-size: 26px;
     font-style:italic;
 }
@@ -77,14 +77,28 @@ ul {
 }
 
 p {
-    text-align: center;
     color: black;
+    line-height: 2;
     font-size: 20px;
     margin-top: 0;
     margin-bottom: 1rem;
-    font-family: 'Scheherazade New', serif;
-    font-weight: bold;
+    font-family: 'Hind Madura', serif;
 }
+
+pre code {
+    height: relative;
+    background-color: #eee;
+    overflow-x: auto;
+    tab-size: 1;
+    border: 1px solid #999;
+    display: block;
+    padding: 20px;
+}
+
+code {
+    font-size: 15px;
+}
+
 .nav {
     display: inline-grid;
     height: 20%;
@@ -166,7 +180,7 @@ p {
     align-items: center;
 }
 
-#box {
+#center {
     text-align: center;
     color: black;
     width: auto;
@@ -270,6 +284,15 @@ input[type="file"] {
 
 
 .img {
-    width: 500px;
-    height: 120px;
+    width: auto;
+    text-align: center;
+}
+
+.fil {
+    color: green;
+    line-height: 2;
+    font-size: 20px;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-family: 'Hind Madura', serif;
 }
