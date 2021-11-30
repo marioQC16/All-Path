@@ -6,6 +6,8 @@ import pandas as pd
 import requests
 import sys
 import glob
+import copy
+from timeit import default_timer as timer
 
 
 def initialSetup(graphFile):
@@ -326,17 +328,39 @@ def indexGraph(graphName):
     return ""
 
 
+def all_pairs_shortest_path(adjacency_matrix):
+    new_array = copy.deepcopy(adjacency_matrix)
+
+    for k in range(len(new_array)):
+        for i in range(len(new_array)):
+            for j in range(len(new_array)):
+                array = adjacency_matrix[k]
+
+    return new_array
 """
 Write new code below this block
 
 
 """
 newest = min(glob.iglob('./uploads/*.csv'), key=os.path.getctime)
+startIndex = timer()
 
 print(indexGraph(newest))
+endIndex = timer()
+print("Indexing time for our Algorithm")
+print(endIndex - startIndex)
 startNode = int(sys.argv[1])
 
 endNode = int(sys.argv[2])
-
-
+print("Search time for our Algorithm")
+startSearch = timer()
 shortestPath(indexList, num, startNode, endNode)
+endSearch = timer()
+print(endSearch - startSearch)
+
+print("Time taken for All Pairs Path")
+startCompare = timer()
+all_pairs_shortest_path(newest)
+endCompare = timer()
+print(endCompare - startCompare)
+
