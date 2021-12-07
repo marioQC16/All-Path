@@ -48,6 +48,9 @@ app.get('/demo', (req, res) => {
 app.get('/demo', (req, res) => {
     res.sendFile('demo')
 });
+app.get('/resources', (req, res) => {
+    res.render('resources')
+});
 
 // ---------------------- demo page --------------------------------------
 // upload graph file from browser

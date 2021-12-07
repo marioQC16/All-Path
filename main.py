@@ -205,11 +205,11 @@ def shortestPath(index, nodes, start, end):
                 if indexNumber % nodes == 0 and level == 1:
                     if int((indexNumber / (nodes ** level))) == int(start):
                         middle = findMiddleNodes(nodes, level, indexNumber)
-                        print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end))
+                        print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end) + "\n")
                 else:
                     if int((indexNumber / (nodes ** level)) + 1) == int(start):
                         middle = findMiddleNodes(nodes, level, indexNumber)
-                        print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end))
+                        print("The shortest path from", sys.argv[1], "to", sys.argv[2], "is " + str(start) + ", " + middle + str(end) + "\n")
 
 
 
@@ -360,10 +360,10 @@ endCompare = timer()
 
 
 print("Indexing time for our Algorithm")
-print(f"{endIndex - startIndex}ms")
+print(f"{endIndex - startIndex}ms\n")
 
 print("Search time for our Algorithm")
-print(f"{endSearch - startSearch}ms")
+print(f"{endSearch - startSearch}ms\n")
 
 print("Comparison time taken for All Pairs Path")
-print(f"{endCompare - startCompare}ms")
+print(f"{endCompare - startCompare}ms\n")
