@@ -344,23 +344,26 @@ Write new code below this block
 """
 newest = min(glob.iglob('./uploads/*.csv'), key=os.path.getctime)
 startIndex = timer()
-
 print(indexGraph(newest))
 endIndex = timer()
-print("Indexing time for our Algorithm")
-print(endIndex - startIndex)
-startNode = int(sys.argv[1])
 
+startNode = int(sys.argv[1])
 endNode = int(sys.argv[2])
-print("Search time for our Algorithm")
+
 startSearch = timer()
 shortestPath(indexList, num, startNode, endNode)
 endSearch = timer()
-print(endSearch - startSearch)
 
-print("Time taken for All Pairs Path")
 startCompare = timer()
 all_pairs_shortest_path(newest)
 endCompare = timer()
-print(endCompare - startCompare)
 
+
+print("Indexing time for our Algorithm")
+print(f"{endIndex - startIndex}ms")
+
+print("Search time for our Algorithm")
+print(f"{endSearch - startSearch}ms")
+
+print("Comparison time taken for All Pairs Path")
+print(f"{endCompare - startCompare}ms")
