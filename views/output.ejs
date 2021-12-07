@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> All Path Algorithm </title>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/styleSheet.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
+</head>
+ <body img src="/images/algorithm.jpg">
+	   <div class="page" >
+
+			<h1 > All Path Algorithm </h1 >
+			<h2 > Demo Page </h2 >
+			<nav class="nav" >
+				<div class="nav--border" >
+					<ul >
+
+						<a href="/home" class="nav--link" >
+							<div class="nav--icon-container" >
+								<i class="material-icons" > home</i >
+							</div >
+							<span class="nav__label" > Home Page</span >
+						</a >
+
+						<a href="/demo" class="nav--link" >
+							<div class="nav--icon-container" >
+								<i class="material-icons" > code</i >
+							</div >
+							<span class="nav__label" > Demo Page</span >
+						</a >
+
+						<a href="/resources" class="nav--link" >
+							<div class="nav--icon-container" >
+								<i class="material-icons" > info </i >
+							</div >
+							<span class="help__label" > Resources</span >
+						</a >
+
+						<div class="help" >
+						<a href="/help" class="help--link" >
+							<div class="help--icon-container" >
+								<i class="material-icons" > help_outline</i >
+							</div >
+							<span class="help__label" > Help</span >
+						</a >
+						</div >
+
+					</ul>
+				</div >
+			</nav >
+		</div >
+
+		<div class="main" >
+	   
+			<div id="center" >
+		<p> The program ran successfully! </p>
+		<p> You can now search for the shortest path </p>
+
+	   	</p>
+		<form ref='SForm' id='SForm' action='/shortest'  method='post' encType="multipart/form-data"> 
+	   	<p>To find the shortest path from one node to another from 
+		'<%   if(typeof fil2 != "undefined" && fil2)      { %>
+		  <%=  fil2  %>
+		  <% }    %>', Enter the initial node and the destination node</p>
+
+	   	<p>
+	   		Start Node : <input type="text"  size="12" value="" name="Snode" id="Snode">
+	   	</p>
+
+	   	<p>
+	   		End Node: <input type="text" size="12" value="" name="Lnode" id="Lnode">
+	   	</p>
+
+		
+		<div id="run">
+		<p>
+				<input type="submit" value=" Search " id="search" />
+				</p>
+			</div>
+			<%   if(typeof searcherr != "undefined" && searcherr)      { %>
+			<div class="alertclass">
+			  <div class="alert-warning" role="alert">
+				<strong><%=  searcherr  %></strong>
+			  </div>
+			</div> 
+		  <% }    %>
+       
+		
+		
+			<br><br>
+			
+			<div class= path>
+			<p>
+			<br>
+			<%   if(typeof ans != "undefined" && ans)      { %>
+			Result
+			<textarea id="ans" cols="50" rows="4"> <%= ans %> </textarea>
+			</p>
+			 <% }    %>
+			<br><br>
+			
+
+			<p> Reset the graph file to upload another one to run the algorithm on using the button below  
+			</form>
+			
+			 <form action='/reset' method='post' encType="multipart/form-data">
+			<div id="run">
+			
+			 <input type="submit" value="Reset graph file" id="reset"/> 
+				 </p>
+				
+			</div>
+			 </form>
+			<p>
+			 <%   if(typeof reseterror != "undefined" && reseterror)      { %>
+			<div class="alertclass">
+			  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+				<strong><%=  reseterror  %></strong>
+			  </div>
+			</div> 
+		  <% }    %>
+			
+			<%   if(typeof reset != "undefined" && reset)      { %>
+			<div class="alertclass">
+			  <div class="alert alert-success alert-dismissible fade show" role="alert">
+				<strong><%=  reset  %></strong>
+			  </div>
+			</div> 
+		  <% }    %>
+       </p>
+	   </div>
+	   </div>
+	</body>
+
+	<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+<script>
+   function addDarkmodeWidget() {
+    new Darkmode(options).showWidget();
+  }
+  window.addEventListener('load', addDarkmodeWidget);
+
+  const options = {
+    bottom: '64px', // default: '32px' 
+    right: '32px', // default: '32px' 
+    left: 'unset', // default: 'unset' 
+    time: '0.5s', // default: '0.3s' 
+    mixColor: '#fff', // default: '#fff' 
+    backgroundColor: '#fff', // default: '#fff' 
+    buttonColorDark: '#100f2c', // default: '#100f2c' 
+    buttonColorLight: '#fff', // default: '#fff' 
+    saveInCookies: false, // default: true, 
+    label: '&#127763', // default: '' 
+    autoMatchOsTheme: true // default: true
+}
+</script> 
+</html>
