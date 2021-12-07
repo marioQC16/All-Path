@@ -4,3 +4,7 @@ This is done by using logical operations on each column of the adjacency matrix,
 
 # Searching
 Once the graph has been indexed the indexed value can be manipulated to obtain the starting node, the ending node, and any node that must be traveled between them
+
+# Running
+To run this enter "node app.js" into the terminal 
+Then the application will be running on "http://localhost:3000" on your system
